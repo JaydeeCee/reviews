@@ -5,9 +5,11 @@ so as not to overload the server memory.
 
 ## Maven
 Functionality of this package is contained in the maven pom.xml
+Please insert username and password where placeholders are used in the application.properties file
 
 ### Installation:
 Install maven-built jar as a service. Application runs in Tomcat, port 8101.
+
 
 ### MySQL:
 Application uses MySQL Database. Runs on port 3306.
