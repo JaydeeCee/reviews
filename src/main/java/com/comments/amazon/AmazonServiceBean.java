@@ -16,7 +16,7 @@ import com.comments.domain.Result;
 import com.comments.utils.Json;
 
 
-
+// Service to get amazon Reviews after scraping is done
 @Service
 public class AmazonServiceBean implements AmazonService {
 	
@@ -28,11 +28,12 @@ public class AmazonServiceBean implements AmazonService {
 	
 	private final static Logger LOGGER = LoggerFactory.getLogger(AmazonServiceBean.class);
 	
+	// method to return review params after scraping
 	@Override
 	public ResponseEntity<Result<List<CommentExtract>>> getAmazonReviews(RequestEntity<CommentRequest> request) {
 		
 		Result<List<CommentExtract>> amazonReviews = new Result<>();
-	//	String pageNumber = "1";
+	
 		
 		try {
 		
