@@ -7,17 +7,17 @@ so as not to overload the server memory.
 Functionality of this package is contained in the maven pom.xml
 Please insert username and password where placeholders are used in the application.properties file
 
-### Installation:
+## Installation:
 Install maven-built jar as a service. Application runs in Tomcat, port 8101.
 
 
-### MySQL:
+## MySQL:
 Application uses MySQL Database. Runs on port 3306.
 Database name = reviews
 Please create a database in your MySQL before starting application to avoid JdbcConnection Exception.
 Username and Passwords are required. They are set in the application.properties file.
 
-### Author
+## Author
 Ooreade Adeniran
 https://github.com/JaydeeCee
 
