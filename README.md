@@ -1,7 +1,6 @@
 # Overview
 The project contains solutions to retrieving Youtube comments via Youtube API and Amazon Reviews via Web scaping technology.
-Built with Spring Boot Web framework. It relies heavily on JPA and Hibernate for database operations especially for retrieving thousands of Amazon reviews 
-so as not to overload the server memory.
+Built with Spring Boot Web framework. It relies heavily on JPA and Hibernate for database operations especially for retrieving thousands of Amazon reviews so as not to overload the server memory. The application is a multi-threaded application and relies heavily on Spring Boot's executor Service and Thread.
 
 ## Maven
 Functionality of this package is contained in the maven pom.xml
