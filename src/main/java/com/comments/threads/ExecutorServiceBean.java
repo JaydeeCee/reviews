@@ -13,6 +13,8 @@ import com.comments.commons.CommentExtract;
 import com.comments.csv.CsvService;
 import com.comments.email.EmailService;
 
+
+// service for csv ad email thread
 @Service
 public class ExecutorServiceBean {
 	
@@ -24,7 +26,7 @@ public class ExecutorServiceBean {
 	private EmailService emailService;
 	
 	
-	
+	// method for csv and email
 	public void splitProcessEmailAndCsv(String recipientEmailAddress, String videoId, String csvFileName, List<CommentExtract> listCommentExtract) {
 		
 		LOGGER.debug("Now at the Executor Service.");
