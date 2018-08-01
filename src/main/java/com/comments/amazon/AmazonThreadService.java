@@ -35,7 +35,7 @@ public class AmazonThreadService {
 	private final static Logger LOGGER = LoggerFactory.getLogger(AmazonThreadService.class);
 	
 	
-	
+	// method to download html of review page, scrape and store data in db per each url
 	private String SplitScrappingWork(String url, String email, String fileName, String videoId) {
 		
 		Document doc = null;
@@ -81,7 +81,7 @@ public class AmazonThreadService {
 	}
 	
 	
-	// make a callable interface
+	// make a callable interface for running scraping processes as a thread
 	private String getCallableTasks(String amazonUrl, String email, String fileName, String videoId) {
 		String timedOutUrl = "";
 		
@@ -91,7 +91,7 @@ public class AmazonThreadService {
 			};
 			
 			try {
-			// start task
+			// start task and return urls that could not be downloaded from
 			 Future<String> timedOutUrlsFuture = executorService.submit(callableTask);
 			  timedOutUrl = timedOutUrlsFuture.get();
 		
@@ -103,12 +103,13 @@ public class AmazonThreadService {
 	}
 	
 	
-	
+	// for each amazon review url page, perform scraping tasks
 	public List<String> ExecuteAmazonScapperCallable(List<String> amazonUrl, String email, String fileName, String videoId) {
 	
 		List<String> amazonUrls = amazonUrl;
 		int attemptIndex = 0;
 		
+		// for each amazon review page url, make a callable and submit task to executorService
 		amazonUrls.forEach((url) -> {
 			webPageCount++;
 			LOGGER.debug("Webpage " + this.webPageCount +  " submitted to executor Service.");	
@@ -135,7 +136,8 @@ public class AmazonThreadService {
 		LOGGER.debug("Webpage " + this.webPageCount +  " completed.");	
 		System.out.println("Total number of urls not connected " + timedOutConnectionUrls.size());
 		webPageCount = 1;
-		LOGGER.debug(Json.toJson(timedOutConnectionUrls));
+		//LOGGER.debug(Json.toJson(timedOutConnectionUrls));
+		// return timedOutConnectionUrls to keep processes completing before the next starts
 		return timedOutConnectionUrls;
 	}
 	
