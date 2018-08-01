@@ -16,7 +16,7 @@ import org.supercsv.prefs.CsvPreference;
 
 import com.comments.commons.CommentExtract;
 
-
+// service to convert comments and reviews to csv File
 public class CsvService {
 	
 	private final static Logger LOGGER = LoggerFactory.getLogger(CsvService.class);
