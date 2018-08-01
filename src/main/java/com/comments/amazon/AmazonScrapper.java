@@ -16,7 +16,7 @@ import com.comments.commons.Errorcodes;
 import com.comments.domain.Result;
 import com.comments.threads.ExecutorServiceBean;
 
-
+// this service is where the actual scrapig is done
 @Service
 public class AmazonScrapper {
 	
@@ -119,10 +119,12 @@ public class AmazonScrapper {
 				String ddvid = RandomStringUtils.randomAlphanumeric(8);
 				String csvFileName = "Amazon Reviews " + ddvid + " .csv";
 				
+				// determine the total number of pages of reviews that exist
 				List<String> pageNumbers = this.determinePageNumbers(doc);
 				
 				totalPageNumbers = pageNumbers.get(pageNumbers.size()- 1);
 				
+				// If pageNumbers has more than one entry, There are more than 10 reviews and other pages exists. hence multi thread 
 				if(pageNumbers.size() > 1) {
 					AmazonThreadServiceParams params = new AmazonThreadServiceParams();
 					params.setBaseUrl(baseUrl);
@@ -131,14 +133,14 @@ public class AmazonScrapper {
 					params.setTotalPageNumbers(totalPageNumbers);
 					params.setVideoId(videoId);
 					
-					// multi-Thread amazon pages
+					// multi-Thread amazon pages. 
 					this.isPageNumber = false;
 					this.amazonExecutorService.amazonMultiThread(params);
 
 					
 				} else {
 					this.isPageNumber = false;
-					// all reviews available on Page 1
+					// all reviews available on Page 1. Prepare reviews for Response Entity type
 					comments = this.mapScrapperToComment(listReviews);
 					
 					
@@ -148,7 +150,7 @@ public class AmazonScrapper {
 					result.setData(comments);
 					result.setStatus(true);
 					result.setMessage("Amazon Reviews Retrieved");
-					this.isPageNumber = true;
+					this.isPageNumber = true;  // return checker to true.
 					return result;
 				}
 				
@@ -167,7 +169,7 @@ public class AmazonScrapper {
 	
 	
 	
-	// build all Amazon url;
+	// build all Amazon url. Method builds all urls of review pages available 
 	public List<String> buildAllAmazonPagesUrl(String totalPages, String videoId, String baseUrl) {
 		String totalPagesNumber = totalPages;
 		List<String> amazonPagesUrl = new ArrayList<>();
@@ -266,7 +268,7 @@ public class AmazonScrapper {
 	}
 	
 	
-	
+	// map review Elements to Response Entity type.
 	public List<CommentExtract> mapScrapperToComment(List<AmazonScrapperEntity> reviews) {
 		List<CommentExtract> comments = new ArrayList<>();		
 		List<AmazonScrapperEntity> listReviews = reviews;
